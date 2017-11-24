@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -35,14 +36,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
-public class MainActivity extends SwipeBackActivity {
+public class MainActivity_bak extends AppCompatActivity {
 
     public static String COOKIE = "cookie";
 
-    public static int page = 0;
-    public static int state = 1;
     DemoQSVideoView demoVideoView;
 
 
@@ -67,8 +64,34 @@ public class MainActivity extends SwipeBackActivity {
 
     int roomId = 674395;
 
-
+    //    String m3u8_1 = "https://pl-ali.youku.com/playlist/m3u8?vid=XNjIxOTc4MjA4&type=mp4&ups_client_netip=6e56227b&ups_ts=1511228581&utid=2BS1EZebWQMCARuapbD3mm8I&ccode=0501&psid=e71466d4d846976dcfeb5d61fad8fd39&duration=28&expire=18000&ups_key=5db767362c5c77049d4035f815d49e18";
+//    String m3u8_1 = "http://hlsa.douyucdn.cn/live/2298474rTH6DUoA7_550/playlist.m3u8?wsSecret=c85bafc9f3bdd0e2b9bddcd3ff271096 &wsTime=1511225664 &token=h5-douyu-0-2298474-84f9674145bd9daf5b0819893d483131 &did=AND-CHR|46-244453741511229134834";
+//    String m3u8_1 = "http://hlsa.douyucdn.cn/live/2298474rTH6DUoA7_550/playlist.m3u8?wsSecret=a8c35eb6e0b44a3b52cf66c4de4a8175&wsTime=1511228784&token=h5-douyu-0-630127-047c84ea1ebf1d5b800d0df87643af64&did=AND-CHR|46-244453741511229134834";
+//    String m3u8_1 = "http://hlsa.douyucdn.cn/live/630127rp3tGe9prc_550/playlist.m3u8?wsSecret=a8c35eb6e0b44a3b52cf66c4de4a8175&wsTime=1511228784&token=h5-douyu-0-630127-047c84ea1ebf1d5b800d0df87643af64&did=IOS-SAF|9-051684641511231706503";
+//    String m3u8_1 = "http://27.152.181.221/v53915232/playlist.m3u8";
+//    String m3u8_1 = "http://9180.liveplay.myqcloud.com/live/9180_269106";
     String m3u8_1 = "http://27.152.181.221/v53915232/playlist.m3u8";
+//    String m3u8_1 = "http://9180.liveplay.myqcloud.com/live/9180_269106.m3u8";
+//    String m3u8_1 = "http://9180.liveplay.myqcloud.com/live/9180_902071.m3u8";
+//    String m3u8_1 = "http://9180.liveplay.myqcloud.com/live/9180_902149.m3u8";
+//    String m3u8_1 = "http://9180.liveplay.myqcloud.com/live/9180_903738.m3u8";
+
+
+    //http://9180.liveplay.myqcloud.com/live/9180_269106.m3u8
+    //http://9180.liveplay.myqcloud.com/live/9180_902071.m3u8
+    //http://9180.liveplay.myqcloud.com/live/9180_902149.m3u8
+    //http://9180.liveplay.myqcloud.com/live/9180_902149.m3u8
+    //http://9180.liveplay.myqcloud.com/live/9180_897624.m3u8
+    //http://9180.liveplay.myqcloud.com/live/9180_903738.m3u8
+
+//    http://hlsa.douyucdn.cn/live/630127rp3tGe9prc_550/playlist.m3u8?wsSecret=a8c35eb6e0b44a3b52cf66c4de4a8175&wsTime=1511228784&token=h5-douyu-0-630127-047c84ea1ebf1d5b800d0df87643af64&did=IOS-SAF|9-051684641511231706503
+
+
+//    http://hls1a.douyucdn.cn/live/3657961rd7mTebHs_550/playlist.m3u8?
+// wsSecret=7d74126dec44637e7b467a8629a33099
+// &wsTime=1511228234
+// &token=h5-douyu-0-3657961-2b3439a2b1a8f4a38260b7d80df48530
+// &did=IOS-SAF|9-051684641511231706503
 
     String url;
     int media;
@@ -78,10 +101,55 @@ public class MainActivity extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        setSwipeBackEnable(true);
-
 //        requestLogin("version=3.5.0&platform=android&packageId=3&channel=and-laosiji.cpd-3&deviceName=HUAWEI+FRD-AL00&androidVersion=7.0");
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //执行登录代码  start
+                try {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("username", "17074990702");
+                    map.put("password", "gcSZtaXMPUUrDs9YBXzroQaph4mhIB/rEmkwlwNQHSUhOlRxBkH65hVjWje41Vy9FDeawfWwtXfMbY/suBAPPkaGj+3JPk+k7OsJRwzDhOuEKH2hOvYC1Z3ihqDKIElv4gOzuAjddHMH6tpZPOPcq6qIJKAPzFwzfodfKg7Wv+s=");
+                    map.put("remember", "true");
+                    cookie = MainActivity_bak.this.getSharedPreferences("QSVideoPlayer", Context.MODE_PRIVATE).getString(COOKIE, "");
+                    if (TextUtils.isEmpty(cookie)) {
+                        PostUtil.interceptor = new ConnectInterceptor() {
+                            @Override
+                            public void interceptorEnd(HttpURLConnection connection) {
+                                //结束可以用来保存cookie
+                                String sessionId = cookie = PostUtil.PrintCookie(connection, MainActivity_bak.this);
+                                Log.i(TAG, "interceptorEnd: sessionId \n" + sessionId);
+                            }
+
+                            @Override
+                            public void interceptorStart(HttpURLConnection connection) {
+
+                            }
+                        };
+
+                        String json = PostUtil.post(host + "?" + "version=3.5.0&platform=android&packageId=3&channel=and-laosiji.cpd-3&deviceName=HUAWEI+FRD-AL00&androidVersion=7.0", null, map, null);
+
+                        LogUtil.i(TAG, "run: " + JsonUtil.formatJson(json));
+
+                    }
+                    //执行登录代码  end
+                    Log.i(TAG, "run: " + cookie);
+
+
+                    Map<String, String> map1 = new HashMap<String, String>();
+                    map1.put("Cookie", cookie);
+                    //final String hst = "http://123.207.176.15/room/getRooms";
+//                    final String paramsStr = "page=0&status=1&version=3.5.0&platform=android&packageId=3";
+//                    requestRoomMsg();
+                    String str = PostUtil.post("http://123.207.176.15/room/getRooms?page=1&status=1&version=3.5.0&platform=android&packageId=3", map1, null, null);
+                    LogUtil.i(TAG, "run: " + JsonUtil.formatJson(str));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
 
 //        requestLogin("version=3.5.0&platform=android&packageId=3&channel=and-laosiji.cpd-3&deviceName=HUAWEI+FRD-AL00&androidVersion=7.0&username=17074990702&password=123456aa&remember=true");
@@ -120,79 +188,6 @@ public class MainActivity extends SwipeBackActivity {
 
 
     }
-
-
-    public void requestNet() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //执行登录代码  start
-                try {
-                    Map<String, String> map = new HashMap<String, String>();
-                    map.put("username", "17074990702");
-                    map.put("password", "gcSZtaXMPUUrDs9YBXzroQaph4mhIB/rEmkwlwNQHSUhOlRxBkH65hVjWje41Vy9FDeawfWwtXfMbY/suBAPPkaGj+3JPk+k7OsJRwzDhOuEKH2hOvYC1Z3ihqDKIElv4gOzuAjddHMH6tpZPOPcq6qIJKAPzFwzfodfKg7Wv+s=");
-                    map.put("remember", "true");
-                    cookie = MainActivity.this.getSharedPreferences("QSVideoPlayer", Context.MODE_PRIVATE).getString(COOKIE, "");
-                    if (TextUtils.isEmpty(cookie)) {
-                        PostUtil.interceptor = new ConnectInterceptor() {
-                            @Override
-                            public void interceptorEnd(HttpURLConnection connection) {
-                                //结束可以用来保存cookie
-                                String sessionId = cookie = PostUtil.PrintCookie(connection, MainActivity.this);
-                                Log.i(TAG, "interceptorEnd: sessionId \n" + sessionId);
-                            }
-
-                            @Override
-                            public void interceptorStart(HttpURLConnection connection) {
-
-                            }
-                        };
-
-                        String json = PostUtil.post(host + "?" + "version=3.5.0&platform=android&packageId=3&channel=and-laosiji.cpd-3&deviceName=HUAWEI+FRD-AL00&androidVersion=7.0", null, map, null);
-
-                        LogUtil.i(TAG, "run: " + JsonUtil.formatJson(json));
-
-                    }
-                    //执行登录代码  end
-                    Log.i(TAG, "run: " + cookie);
-
-
-                    Map<String, String> map1 = new HashMap<String, String>();
-//                    map1.put("Cookie", cookie);
-
-//                    uid=2316539;PHPSESSID=v6sj09n48iss9b9ka3jsj13hv1;
-//                    cookie = "PHPSESSID=v6sj09n48iss9b9ka3jsj13hv1;uid=2316539;";
-                    map1.put("Cookie", cookie);
-
-                    Map<String, String> params = new HashMap<String, String>();
-                    Log.i(TAG, "params: page" + page);
-//                    params.put("haha", "haha");
-//                    params.put("page",  "3");
-//                    params.put("status", "1");
-//                    params.put("version", "3.5.0");
-//                    params.put("platform", "android");
-//                    params.put("packageId", "3");
-                    //final String hst = "http://123.207.176.15/room/getRooms";
-//                    final String paramsStr = "page=0&status=1&version=3.5.0&platform=android&packageId=3";
-//                    requestRoomMsg();
-
-                    String str = PostUtil.post("http://123.207.176.15/room/getRooms?page=" + page + "&status=" + state + "&version=3.5.0&platform=android&packageId=3", map1, null, null);
-//                  String str = PostUtil.post("http://123.207.176.15/room/getRooms?", map1, params, null);
-
-
-                    ListVideoActivity.json = str;
-                    LogUtil.i(TAG, "run: " + JsonUtil.formatJson(str));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
-    }
-
-    ;
 
 
     private static final String TAG = "MainActivity";
@@ -242,8 +237,6 @@ public class MainActivity extends SwipeBackActivity {
     }
 
     public void 视频列表(View v) {
-        page++;
-        Log.i(TAG, "视频列表: page=" + page);
         startActivity(new Intent(this, ListVideoActivity.class));
     }
 
@@ -338,7 +331,6 @@ public class MainActivity extends SwipeBackActivity {
     @Override
     public void onResume() {
         super.onResume();
-        requestNet();
         if (flag)
             demoVideoView.play();
         handler.removeCallbacks(runnable);

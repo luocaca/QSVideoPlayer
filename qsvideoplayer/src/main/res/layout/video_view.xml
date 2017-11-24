@@ -113,6 +113,8 @@
         android:scaleType="center"
         android:src="@drawable/jc_click_play_selector" />
 
+
+    <!--        android:background="#333333"-->
     <FrameLayout
         android:id="@+id/loading_container"
         android:layout_width="match_parent"

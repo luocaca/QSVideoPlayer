@@ -8,6 +8,7 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:context="org.song.demo.MainActivity">
@@ -57,8 +58,26 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:inputType="number"
                 android:onClick="ijk_exo解码"
                 android:text="ijk_exo解码" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/et_room_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="输入房间号。。。"
+                android:onClick="ijk_exo解码"
+                android:visibility="gone" />
         </LinearLayout>
 
 
