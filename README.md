@@ -1,7 +1,7 @@
 QSVideoPlayer
 ====
   * 只需100行java代码即可打造自己的播放器!<br/>提供QSVideoViewHelp辅助类,该类提供了常用控件的逻辑和手势调节支持,可快速自定义ui打造自己的播放器,不用写一行播放逻辑
-  * QSVideoView接口完善,事件的监听,设置视频比例,切换全屏等
+  * QSVideoView接口完善,事件的监听,设置视频比例,切换全屏,静音等
   * 架构设计优良,模块化可扩展设计,解码模块目前提供了 AndroidMedia(系统自带)、ijkMedia(基于ffmepg)+ijkExoMedia(基于exo)、ExoMedia(2.0.4)解码器
   * 根据系统版本自动选择SurfaceView和TextureView,支持api9+
   * 提供list视频列表自动销毁播放代码
@@ -9,7 +9,7 @@ QSVideoPlayer
 
 ![下载demo.apk](https://raw.githubusercontent.com/tohodog/QSVideoPlayer/master/source/video_qrcode.png)
 <br/>
-扫码 [demo.apk](https://github.com//tohodog/QSVideoPlayer/raw/master/source/qsvideoplayer.apk) 下载
+扫码 [demo.apk](https://raw.githubusercontent.com/tohodog/QSVideoPlayer/master/source/qsvideoplayer.apk) 下载
 
 ## 使用说明
 下载项目 添加qsvideoplayer文件夹为自己的项目依赖即可 
@@ -30,6 +30,7 @@ ps:<br/>删除ijk解码器: build.gradle注释掉所有依赖,media包里删除I
 ```
 
 ## Demo使用
+### JAVA
 ```
 //DemoQSVideoView的ui用的jc播放器
 DemoQSVideoView qsVideoView = (DemoQSVideoView) findViewById(R.id.xxx);
@@ -65,7 +66,7 @@ qsVideoView.play();//
 
 ```
 
-## 返回键退出全屏
+### 返回键退出全屏
 ```
     @Override
     public void onBackPressed() {
@@ -73,6 +74,21 @@ qsVideoView.play();//
             return;
         super.onBackPressed();
     }
+```
+### XML
+```
+        <org.song.videoplayer.DemoQSVideoView
+                android:id="@+id/xxx"
+                android:layout_width="match_parent"
+                android:layout_height="400dp" />
+```
+
+### AndroidManifest
+```
+        <activity
+            android:name=".VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
 ```
 
 ## DIY播放器:
@@ -138,12 +154,15 @@ qsVideoView.play();//
     void enterWindowFullscreen();//全屏
 
     void quitWindowFullscreen();//退出全屏
+    
+    boolean setMute(boolean isMute);//是否静音
 
     void release();//销毁
 
 ```
 
-![输入图片说明](http://git.oschina.net/uploads/images/2017/0614/173143_a73430c9_530535.jpeg "在这里输入图片标题")
-![](https://github.com//tohodog/QSVideoPlayer/raw/master/source/lsit.gif)
+![](https://github.com/tohodog/QSVideoPlayer/raw/master/source/main.png)
+![](https://github.com/tohodog/QSVideoPlayer/raw/master/source/full1.png)
+![](https://github.com/tohodog/QSVideoPlayer/raw/master/source/lsit.gif)
 
 ![输入图片说明](http://git.oschina.net/uploads/images/2017/0224/180438_84c8332c_530535.jpeg "在这里输入图片标题")
