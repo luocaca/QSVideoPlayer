@@ -248,6 +248,13 @@ public class MainActivity extends SwipeBackActivity {
     }
 
 
+    public void 视频列表1(View v) {
+        page++;
+        Log.i(TAG, "视频列表: page=" + page);
+        startActivity(new Intent(this, RecyVideoActivity.class));
+    }
+
+
     public void m3u8直播(View v) {
         play(getRoomId(), media);
 

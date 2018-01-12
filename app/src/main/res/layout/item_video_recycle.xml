@@ -10,20 +10,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp">
+
         <ImageView
             android:id="@+id/iv_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            />
+            android:layout_height="match_parent" />
 
         <org.song.videoplayer.DemoQSVideoView
             android:id="@+id/qs"
-            android:layout_width="150dp"
-            android:layout_height="265dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_alignParentRight="true" />
 
 
     </RelativeLayout>
