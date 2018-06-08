@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * 文件浏览器
+ * 文件浏览器nihoa
  */
 @SuppressLint("SdCardPath")
 public class ExSelectDialog extends ListActivity {
