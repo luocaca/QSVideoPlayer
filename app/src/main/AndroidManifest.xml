@@ -33,15 +33,19 @@
         </activity>
         <activity
             android:name=".RecyVideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
         <activity
             android:name=".ListVideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
         <activity
             android:name=".ExSelectDialog"
             android:theme="@android:style/Theme.Holo.Light.Dialog"></activity>
+        <activity android:name=".base.BaseViewPagerActivity" />
+        <activity
+            android:name=".ui.ViewPagerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale" />
+
+
     </application>
 
 </manifest>

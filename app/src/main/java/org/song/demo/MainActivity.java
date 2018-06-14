@@ -21,6 +21,7 @@ import org.song.demo.http.ConnectInterceptor;
 import org.song.demo.http.JsonUtil;
 import org.song.demo.http.LogUtil;
 import org.song.demo.http.PostUtil;
+import org.song.demo.ui.ViewPagerActivity;
 import org.song.videoplayer.DemoQSVideoView;
 import org.song.videoplayer.IVideoPlayer;
 import org.song.videoplayer.PlayListener;
@@ -249,9 +250,11 @@ public class MainActivity extends SwipeBackActivity {
 
 
     public void 视频列表1(View v) {
-        page++;
-        Log.i(TAG, "视频列表: page=" + page);
-        startActivity(new Intent(this, RecyVideoActivity.class));
+//        page++;
+//        Log.i(TAG, "视频列表: page=" + page);
+//        startActivity(new Intent(this, RecyVideoActivity.class));
+
+        ViewPagerActivity.start(this);
     }
 
 

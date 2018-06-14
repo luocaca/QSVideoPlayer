@@ -2,8 +2,12 @@ package org.song.demo.http;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
+
+import org.song.demo.CallBack.AjaxCallBack;
+import org.song.demo.CallBack.Subscription;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,7 +17,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Map;
 
 import static org.song.demo.MainActivity.COOKIE;
@@ -166,5 +172,97 @@ public class PostUtil {
         return sessionId;
 
     }
+
+
+    public static Subscription asyncGet(String actionUrl, AjaxCallBack ajaxCallBack) {
+        AsyncTask asyncTask = new AsyncGetTask(ajaxCallBack).execute(actionUrl);
+
+        return (Subscription) asyncTask;
+
+    }
+
+
+    private static class AsyncGetTask extends AsyncTask<String, Void, String> implements Subscription {
+        AjaxCallBack ajaxCallBack;
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            // 异步 加载 json
+
+            String result = "";
+            try {
+                result = doAsyncGet(strings[0]);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+
+            return result;
+        }
+
+        AsyncGetTask(AjaxCallBack ajaxCallBack) {
+            super();
+            this.ajaxCallBack = ajaxCallBack;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            ajaxCallBack.onSucceed(s);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled(String s) {
+            super.onCancelled(s);
+            ajaxCallBack.onCancle();
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
+        @Override
+        public void unSubscribe() {
+
+            this.cancel(true);
+        }
+
+
+        String doAsyncGet(String url) throws MalformedURLException {
+
+            StringBuilder json = new StringBuilder();
+            try {
+                URL oracle = new URL(url);
+                URLConnection yc = oracle.openConnection();
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        yc.getInputStream(), "utf-8"));//防止乱码
+                String inputLine = null;
+                while ((inputLine = in.readLine()) != null) {
+                    json.append(inputLine);
+                }
+                in.close();
+            } catch (MalformedURLException e) {
+
+            } catch (IOException e) {
+            }
+            return json.toString();
+        }
+
+    }
+
 
 }
