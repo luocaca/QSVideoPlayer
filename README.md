@@ -1,4 +1,4 @@
-QSVideoPlayer
+QSVideoPlayer QQ群 471474615
 ====
   * 只需100行java代码即可打造自己的播放器!<br/>提供QSVideoViewHelp辅助类,该类提供了常用控件的逻辑和手势调节支持,可快速自定义ui打造自己的播放器,不用写一行播放逻辑
   * QSVideoView接口完善,事件的监听,设置视频比例,切换全屏,静音等
