@@ -5,15 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="25dp" />
+        android:layout_height="20dp" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
 
         app:tabMode="scrollable" />
 

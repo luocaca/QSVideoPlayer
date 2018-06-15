@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -61,11 +62,21 @@ public class PlayListFragment extends BaseLazyFragment implements CallBack {
 
         if (b) {
             if (demoQSVideoView != null) {
+//                demoQSVideoView.play();
+                demoQSVideoView.setiMediaControl(1);
+                demoQSVideoView.enterFullMode = 3;
                 demoQSVideoView.play();
+                demoQSVideoView.setVisibility(View.VISIBLE);
+
+
             }
         } else {
             if (demoQSVideoView != null) {
-                demoQSVideoView.pause();
+//                demoQSVideoView.pause();
+                demoQSVideoView.setVisibility(View.GONE);
+                demoQSVideoView.releaseInThread();
+
+
             }
         }
 
@@ -83,10 +94,15 @@ public class PlayListFragment extends BaseLazyFragment implements CallBack {
 //                Toast.makeText(mActivity, "" + GsonUtil.formatJson2String(json), Toast.LENGTH_SHORT).show();
 
 
-                ZhuBoGsonBean zhuBoGsonBean = GsonUtil.formateJson2Bean(json, ZhuBoGsonBean.class);
+                ZhuBoGsonBean zhuBoGsonBean = null;
+                try {
+                    zhuBoGsonBean = GsonUtil.formateJson2Bean(json, ZhuBoGsonBean.class);
+                    setUpRecycleView(mRecyclerView, zhuBoGsonBean);
 
-
-                setUpRecycleView(mRecyclerView, zhuBoGsonBean);
+                } catch (Exception e) {
+                    Toast.makeText(mActivity, "数据解析失败", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
 
 
             }
@@ -139,8 +155,7 @@ public class PlayListFragment extends BaseLazyFragment implements CallBack {
     @Override
     public void deactivate(View currentView, int position) {
         final DemoQSVideoView demoQSVideoView = (DemoQSVideoView) currentView.findViewById(R.id.qs);
-        if (demoQSVideoView != null)
-        {
+        if (demoQSVideoView != null) {
             demoQSVideoView.setVisibility(View.GONE);
             demoQSVideoView.releaseInThread();
 
@@ -210,7 +225,7 @@ public class PlayListFragment extends BaseLazyFragment implements CallBack {
         public void bindData(String s) {
             String[] arr = s.split(",");
             qsVideoView.setUp(arr[1], arr[0]);
-            Glide.with(mActivity).load(arr[2]).placeholder(R.mipmap.dong).crossFade().error(R.mipmap.dong).into(iv_bg);
+            Glide.with(mActivity).load(arr[2]).placeholder(R.mipmap.loading).crossFade(300).error(R.mipmap.dong).into(iv_bg);
 //            qsVideoView.getCoverImageView().setImageResource(R.mipmap.ic_launcher);
             FrameLayout.LayoutParams l = new FrameLayout.LayoutParams(-1, (int) (((int) (Math.random() * 600) + 100) * getResources().getDisplayMetrics().density));
             //qsVideoView.setLayoutParams(l);
@@ -223,7 +238,7 @@ public class PlayListFragment extends BaseLazyFragment implements CallBack {
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        for (int i = 20; i < zhuBoGsonBean.zhubo.size(); i++)
+        for (int i = 0; i < zhuBoGsonBean.zhubo.size(); i++)
             data.add(zhuBoGsonBean.zhubo.get(i).title + "," + zhuBoGsonBean.zhubo.get(i).address + "," + zhuBoGsonBean.zhubo.get(i).img);
 
 
@@ -251,4 +266,15 @@ public class PlayListFragment extends BaseLazyFragment implements CallBack {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (demoQSVideoView != null) {
+//                demoQSVideoView.pause();
+            demoQSVideoView.setVisibility(View.GONE);
+            demoQSVideoView.releaseInThread();
+
+
+        }
+    }
 }
