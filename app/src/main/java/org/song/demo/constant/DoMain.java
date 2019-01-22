@@ -7,7 +7,7 @@ package org.song.demo.constant;
 public interface DoMain {
 
 
-    String Host = "http://api.hclyz.cn:81/mf/";
+    String Host = "http://api.hclyz.com:81/mf/";
 
     String home = "json.txt";
 
