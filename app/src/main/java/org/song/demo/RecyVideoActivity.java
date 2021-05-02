@@ -117,6 +117,7 @@ public class RecyVideoActivity extends SwipeBackActivity implements CallBack {
         super.onBackPressed();
     }
 
+
     class Adapter extends RecyclerView.Adapter<Holder> {
 
         List<String> data;

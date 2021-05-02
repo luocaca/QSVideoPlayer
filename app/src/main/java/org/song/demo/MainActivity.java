@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -36,9 +37,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
-public class MainActivity extends SwipeBackActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static String COOKIE = "cookie";
 
@@ -80,7 +80,7 @@ public class MainActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
 
 
-        setSwipeBackEnable(true);
+//        setSwipeBackEnable(true);
 
 //        requestLogin("version=3.5.0&platform=android&packageId=3&channel=and-laosiji.cpd-3&deviceName=HUAWEI+FRD-AL00&androidVersion=7.0");
 
@@ -601,7 +601,6 @@ public class MainActivity extends SwipeBackActivity {
 
     }
 
-
     private static String getStringFromInputStream(InputStream is) throws IOException {
 
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -620,5 +619,8 @@ public class MainActivity extends SwipeBackActivity {
 
     }
 
+    public void 月光宝盒(View view) {
+        ListVideoActivity1.start(this);
 
+    }
 }
